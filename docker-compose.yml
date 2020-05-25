@@ -2,13 +2,16 @@ version: '3.7'
 services:
   mysql:
     image: mysql:8.0.18
+    restart: always
     ports:
-      - '3306:3306'
+      - "3306:3306"
     volumes:
       - ./init_db:/docker-entrypoint-initdb.d
-#      - ./data_mysql:/var/lib/mysql
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
       - MYSQL_DATABASE=app
       - MYSQL_USER=user
       - MYSQL_PASSWORD=pass
+volumes:
+  schema:
+    external: true
